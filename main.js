@@ -112,7 +112,7 @@ for(let i = 0; i < people.length; i++) {
 //Lamda loop
 people.forEach(x => console.log(x));
 
-//Objects
+//Objects Key: Value
 let nicholas = {
     firstName: 'Nicholas',
     lastName: 'Chill',
@@ -125,3 +125,125 @@ console.log(nicholas);
 console.log(`First name: ${nicholas.firstName}`);
 let nicholasStr = `${nicholas.firstName} ${nicholas.lastName}, age: ${nicholas.age}`;
 console.log(nicholasStr);
+
+let nicholasAdvanced = {
+    firstName: 'Nicholas',
+    lastName: 'Chill',
+    age: 23,
+    hobbies: ['music', 'bowling', 'disc golf', 'basketball', 'games']
+};
+
+console.log(nicholasAdvanced); //Object
+nicholasJSON = JSON.stringify(nicholasAdvanced); //Object to JSON
+console.log(nicholasJSON);
+console.log(JSON.parse(nicholasJSON)); //Back to an object
+
+//Loop over object
+for(let propertyName in nicholasAdvanced) {
+    let propertyValue = nicholasAdvanced[propertyName];
+    console.log(propertyValue);
+}
+
+//Loop through object and array inside of an object
+for(let propertyName in nicholasAdvanced) {
+    let propertyValue = nicholasAdvanced[propertyName];
+    if(Array.isArray(propertyValue) === true) {
+        for(let hobby of propertyValue) {
+            console.log("Hobby: " + hobby);
+        }
+    } else {
+        console.log(propertyName + ": " + propertyValue);
+    }
+}
+
+//Connection to HTML
+//Ask JS to create a new element
+let myDiv = document.createElement('div');
+myDiv.innerHTML = `
+<h1>Hello from JS!</h1>
+<p>This text is from JavaScript, my age is ${nicholas.age}</p>
+`;
+
+//Grab the body tag
+let body = document.querySelector('body');
+
+//Add the div to the HTML
+body.append(myDiv);
+
+//Another way to add data
+let myBands = [
+    {
+        name: 'Death',
+        genre: 'Death Metal'
+    },
+    {
+        name: 'Rush',
+        genre: 'Prog Rock'
+    }
+];
+
+//Grab the bands div
+let bandsDiv = document.querySelector('#bands');
+for(let band of myBands) {
+    bandsDiv.innerHTML += `
+        <div class="band">
+            <h2>${band.name}</h2>
+            <p>Genre: ${band.genre}</p>
+        </div>
+    `;
+}
+
+//Functions
+function sayHello() {
+    console.log('Hello');
+}
+
+const sayHello2 = () => {
+    console.log('Hello 2');
+}
+
+sayHello();
+sayHello2();
+
+//Diffewrent ways of declaring the same function
+function add(a, b) {
+    return a + b;
+}
+
+const add2 = (a, b) => {
+    return a + b;
+}
+
+const add3 = function(a, b) {
+    return a + b;
+}
+
+//Arrow function with implicit return
+const add4 = (a, b) => a + b;
+
+//Arrow function with implicit return and one parameter
+const add5 = a => a + 5;
+
+console.log(add(1, 2));
+console.log(add2(1, 2));
+console.log(add3(1, 2));
+console.log(add4(1, 2));
+console.log(add5(1));
+
+//Classes
+class Person {
+    constructor(name, age, hobby) {
+        this.name = name;
+        this.age = age;
+        this.hobby = hobby;
+    } 
+
+    greetings() {
+        console.log(`Hi, my name is ${this.name} and I am ${this.age} years old`);
+        console.log('I enjoy ' + this.hobby);
+    }
+}
+
+const nicholasClass = new Person('Nicholas', 23, 'bowling');
+nicholasClass.greetings();
+console.log(nicholasClass.hobby);
